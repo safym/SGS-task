@@ -46,6 +46,8 @@ CREATE TABLE Container
 	Arrival_date DATETIME  NOT NULL
 )
 ```
+[скрипт](task1-sql/1-1.sql)
+
 2. Таблица операций с полями:
 ```
 CREATE TABLE Operation
@@ -59,11 +61,15 @@ CREATE TABLE Operation
 	Inspection_location VARCHAR(50) ,
 )
 ```
+[скрипт](task1-sql/1-2.sql)
+
 3. Запрос, выбирающий из первой таблицы все данные по контейнерам в формате JSON:
 ```
 SELECT * FROM dbo.Container2
 FOR JSON AUTO;
 ```
+[скрипт](task1-sql/1-3-1.sql)
+
 
 или более явно: 
 
@@ -80,16 +86,20 @@ SELECT  Id,
 FROM dbo.Container2
 FOR JSON AUTO;
 ```
+[скрипт](task1-sql/1-3-2.sql)
+
 
 4. Запрос выбирающий из второй таблицы все данные по операциям для определенного контейнера в формате JSON
 
-Примечение: для поля Id таблицы Operation установлен тип данных GUID. По условию к данныму полю сделан запрос, поэтому данные сравниваются со строкой формата "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" (формат GUID)
+Примечение: для поля Id таблицы Operation установлен тип данных GUID. По условию к данныму полю сделан запрос, поэтому данные сравниваются со тестовой строкой формата "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" (формат GUID)
 
 ```
 SELECT  * FROM dbo.Operation
 WHERE Id = '12345678-1234-1234-1234-123456789012'
 FOR JSON AUTO;
 ```
+[скрипт](task1-sql/1-4-1.sql)
+
 
 ```
 SELECT  Id,
@@ -103,6 +113,8 @@ FROM dbo.Operation
 WHERE Id = '12345678-1234-1234-1234-123456789012'
 FOR JSON AUTO;
 ```
+[скрипт](task1-sql/1-4-2.sql)
+
 
 ## Task-2. Выполнить форму ввода с зависимыми полями (VueJS).
 
