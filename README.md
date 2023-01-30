@@ -1,5 +1,7 @@
 #  Тестовое задание (SGS)
 
+https://safym.github.io/SGS-task/
+
 ## Task-1. Написать скрипты  по созданию таблиц и выборке данных.
 
 ## Task Requirements:
