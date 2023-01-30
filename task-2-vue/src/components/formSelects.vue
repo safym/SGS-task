@@ -1,11 +1,19 @@
 <template>
-  <p id="message" v-if="!this.isValidForm">Заполните все поля:</p>
-  <p id="message" v-else>Готово, все поля заполнены! Нажмите "Отправить". (результат в cookie).</p>
+  <p class="message" v-if="!this.isValidForm">📝 Заполните все поля:</p>
+  <div class="message" v-else>
+    <p v-if="actualDataInCockie">✅ Данные сохранены!</p>
+    <div v-else>
+      <p>🕐 Все поля заполнены, почти готово! Нажмите "Сохранить".</p>
+      <p>Результат будет в cookie.</p>
+    </div>
+  </div>
+  
   <form @submit="submitForm">
     <SelectElement 
       v-on:changedSelect="(data) => changedSelect(data)" v-for="(selectData, name, index) in selectList"
       :key="index" 
       :selectName=name 
+      :actualDataInCockie="actualDataInCockie" 
       :selectData="(name != 'factory' && name != 'employee') ? selectData :
                    (name === 'factory') ? filteredFactory : filteredEmployee" :disabledValues="disabledValues">
     </SelectElement>
@@ -31,6 +39,8 @@ export default {
       selectedValues: {},
       disabledValues: ['factory', 'employee'],
 
+      actualDataInCockie: false,
+
       filteredFactory: {},
       filteredEmployee: {},
     }
@@ -38,6 +48,7 @@ export default {
   methods: {
     saveCookie(key, value) {
       document.cookie = `${key} = ${JSON.stringify(value)}; path=/; samesite=Lax`;
+      this.actualDataInCockie = true;
     },
     submitForm(event) {
       event.preventDefault()
@@ -57,6 +68,8 @@ export default {
       return Object.keys(value).length === 0 && value.constructor === Object;
     },
     changedSelect(data) {
+      this.actualDataInCockie = false;
+
       let currentSelectName = Object.keys(data)[0];
       let currentSelectValue = data[currentSelectName];
 
@@ -115,11 +128,13 @@ export default {
 
 <style>
 
-#message {
-  height: 60px;
+.message {
   min-width: 90%;
+  height: 85px;
+  color:cornflowerblue;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
@@ -127,6 +142,10 @@ export default {
   margin: 0;
 
   border-radius: 10px 10px 0 0;
+}
+
+.message > p {
+  margin: 0;
 }
 
 button {

@@ -45,7 +45,7 @@ body {
   justify-content: center;
   align-items: center;
 
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
 }
 

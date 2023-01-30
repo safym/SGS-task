@@ -69,10 +69,10 @@ export default {
 <style scoped>
 .row {
   width: 100%;
-  
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 .row > p {
@@ -86,7 +86,6 @@ select {
   height: 30px;
   line-height: 30px;
   padding: 0 45px 0 10px;
-
 }
 
 </style>
