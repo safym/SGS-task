@@ -29,6 +29,81 @@
 3. Написать запрос, выбирающий из первой таблицы все данные по контейнерам в формате JSON
 4. Написать запрос, выбирающий из второй таблицы все данные по операциям для определенного контейнера в формате JSON
 
+## Решение
+
+1. Таблица Контейнеров с полями.
+```
+CREATE TABLE Container
+(
+	Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY,
+	Container_number BIGINT NOT NULL,
+	Container_Type VARCHAR(50),
+	Lenght REAL,
+	Width REAL,
+	Height REAL,
+	Weight REAL ,
+	Is_empty REAL,
+	Arrival_date DATETIME  NOT NULL
+)
+```
+2. Таблица операций с полями:
+```
+CREATE TABLE Operation
+(
+	Id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY,
+	Container_id UNIQUEIDENTIFIER NOT NULL,
+	Start_date DATETIME NOT NULL,
+	End_date DATETIME,
+	Operation_type VARCHAR(255),
+	Operator_fullname VARCHAR(50),
+	Inspection_location VARCHAR(50) ,
+)
+```
+3. Запрос, выбирающий из первой таблицы все данные по контейнерам в формате JSON:
+```
+SELECT * FROM dbo.Container2
+FOR JSON AUTO;
+```
+
+или более явно: 
+
+```
+SELECT  Id,
+	Container_number AS [Number],
+	Type,
+	Lenght,
+	Width,
+	Height,
+	Weight,
+	Is_empty,
+	Arrival_date
+FROM dbo.Container2
+FOR JSON AUTO;
+```
+
+4. Запрос выбирающий из второй таблицы все данные по операциям для определенного контейнера в формате JSON
+
+Примечение: для поля Id таблицы Operation установлен тип данных GUID. По условию к данныму полю сделан запрос, поэтому данные сравниваются со строкой формата "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" (формат GUID)
+
+```
+SELECT  * FROM dbo.Operation
+WHERE Id = '12345678-1234-1234-1234-123456789012'
+FOR JSON AUTO;
+```
+
+```
+SELECT  Id,
+	Container_id,
+	Start_date,
+	End_date,
+	Operation_type,
+	Operator_fullname,
+	Inspection_location
+FROM dbo.Operation
+WHERE Id = '12345678-1234-1234-1234-123456789012'
+FOR JSON AUTO;
+```
+
 ## Task-2. Выполнить форму ввода с зависимыми полями (VueJS).
 
 ## Task Requirements:
