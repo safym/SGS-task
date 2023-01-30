@@ -13,7 +13,6 @@
       v-on:changedSelect="(data) => changedSelect(data)" v-for="(selectData, name, index) in selectList"
       :key="index" 
       :selectName=name 
-      :actualDataInCockie="actualDataInCockie" 
       :selectData="(name != 'factory' && name != 'employee') ? selectData :
                    (name === 'factory') ? filteredFactory : filteredEmployee" :disabledValues="disabledValues">
     </SelectElement>
