@@ -1,0 +1,2 @@
+SELECT * FROM dbo.Container2
+FOR JSON AUTO;
