@@ -1,4 +1,4 @@
-<h1 align="center"> Тестовое задание для frontend (SGS)</h1>
+<h1 align="center">📃 Тестовое задание для frontend (SGS)</h1>
 
 <p align="center">
   <a href="https://skillicons.dev">
